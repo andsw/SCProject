@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@Data:
+@Data
 @Accessors(chain = true)
 public class NormalResult<T> {
 
@@ -30,7 +30,7 @@ public class NormalResult<T> {
     }
 
     public static <T> NormalResult<T> successWithData(T data) {
-        return new NormalResult<T>(HttpCodeEnum.OK_CODE.getCode(), null, data);
+        return new NormalResult<>(HttpCodeEnum.OK_CODE.getCode(), null, data);
     }
 
     public static <T> NormalResult<T> failureWithMessage(String message) {

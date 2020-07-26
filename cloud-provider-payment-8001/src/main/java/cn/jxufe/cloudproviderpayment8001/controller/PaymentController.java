@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.client.hypermedia.DiscoveredResource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import cn.jxufe.cloudproviderpayment8001.service.PaymentService;
 import cn.jxufe.dto.NormalResult;
 import cn.jxufe.dto.myenum.HttpCodeEnum;
 import cn.jxufe.entity.Payment;
-import cn.jxufe.cloudproviderpayment8001.service.PaymentService;
 
 /**
  * @author hsw
@@ -45,15 +44,19 @@ public class PaymentController {
 
     @GetMapping("/{id}")
     public NormalResult<?> getPayment(@PathVariable("id") Integer id) {
-        return new NormalResult<Payment>(HttpCodeEnum.OK_CODE.getCode(), String.valueOf(port), paymentService.selectPaymentById(id));
+        return new NormalResult<>(HttpCodeEnum.OK_CODE.getCode(), String.valueOf(port), paymentService.selectPaymentById(id));
     }
 
     @PostMapping
     public NormalResult<?> createPayment(@RequestBody Payment payment) {
         paymentService.InsertPayment(payment);
-        return new NormalResult<Payment>(HttpCodeEnum.OK_CODE.getCode(), String.valueOf(port), payment);
+        return new NormalResult<>(HttpCodeEnum.OK_CODE.getCode(), String.valueOf(port), payment);
     }
 
+    /**
+     * 获取注册中心已经注册的实例。
+     * @return 名为discoveryClients的数组。
+     */
     @GetMapping(value = "/discovery")
     public DiscoveryClient paymentInfo() {
         List<String> services = discoveryClient.getServices();
@@ -67,10 +70,14 @@ public class PaymentController {
         return this.discoveryClient;
     }
 
+    /**
+     * 模拟超时
+     * @return 返回端口号
+     */
     @GetMapping(value = "/feign/timeout")
     public String getTimeout() {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

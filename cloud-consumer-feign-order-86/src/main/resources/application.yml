@@ -16,8 +16,8 @@ feign:
   client:
     config:
       default:
-        connectTimeout: 1000
-        readTimeout: 1000
+        connectTimeout: 4000
+        readTimeout: 4000
         loggerLevel: basic
 # 单独设置某个微服务的超时配置
 #feign:
@@ -28,6 +28,7 @@ feign:
 #        readTimeout: 50000
 #        loggerLevel: basic
 #  如果以上都没有设置正确，设置Ribbon 的超时配置也是生效的。因为Feign 底层还是使用Ribbon 负载调用注册到注册中心的微服务的。
+# 可是实践表明只有上面的才有效，下面连编译都没过
 ribbon:
-  ReadTimeout: 5000
-  ConnectTimeout: 5000
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
