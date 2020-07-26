@@ -24,6 +24,6 @@ public class PaymentService {
     public String paymentWithException(Integer id) throws ArithmeticException {
         int a = 0;
         System.out.println(4 / a);
-        return "线程池：" + Thread.currentThread().getName() + "payment ok, id is" + id;
+        return "线程池：" + Thread.currentThread().getName() + "payment time out, id is" + id;
     }
 }

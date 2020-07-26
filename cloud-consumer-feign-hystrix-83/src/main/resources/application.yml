@@ -1,9 +1,9 @@
 server:
-  port: 8003
+  port: 83
 
 spring:
   application:
-    name: cloud-provider-hystrix-payment
+    name: cloud-consumer-feign-hystrix
 
 eureka:
   client:
@@ -11,3 +11,11 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka/
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 4000
+        readTimeout: 4000
+        loggerLevel: basic

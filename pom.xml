@@ -23,6 +23,7 @@
         <module>cloud-consumer-order-85</module>
         <module>cloud-consumer-feign-order-86</module>
         <module>cloud-provider-hystrix-8003</module>
+        <module>cloud-consumer-feign-hystrix-83</module>
     </modules>
     <groupId>cn.jxufe</groupId>
     <artifactId>SCProject</artifactId>
