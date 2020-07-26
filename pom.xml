@@ -12,6 +12,7 @@
     <modules>
         <module>cloud-common</module>
         <module>cloud-eureka-server-7001</module>
+        <!--这个小错误不应该，懒得改-->
         <module>cloue-eureka-server-7002</module>
         <module>cloud-provider-payment-8001</module>
         <module>cloud-provider-payment-8002</module>
@@ -21,6 +22,7 @@
         <module>cloud-provider-payment-8005</module>
         <module>cloud-consumer-order-85</module>
         <module>cloud-consumer-feign-order-86</module>
+        <module>cloud-provider-hystrix-8003</module>
     </modules>
     <groupId>cn.jxufe</groupId>
     <artifactId>SCProject</artifactId>
