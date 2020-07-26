@@ -5,9 +5,9 @@ eureka:
   instance:
     hostname: eureka7001.com
   client:
-    # \u81EA\u5DF1\u5C31\u662F\u6CE8\u518C\u4E2D\u5FC3\uFF0C\u4E0D\u9700\u8981\u6CE8\u518C\u81EA\u5DF1
+    # 自己就是注册中心，不需要注册自己
     register-with-eureka: false
-    # false\u8868\u793A\u81EA\u5DF1\u65F6\u6CE8\u518C\u4E2D\u5FC3\uFF0C\u6211\u7684\u804C\u8D23\u5C31\u662F\u7EF4\u62A4\u670D\u52A1\u5668\u5B9E\u4F8B\uFF0C\u5E76\u4E0D\u9700\u8981\u53BB\u68C0\u7D22\u670D\u52A1
+    # false表示自己时注册中心，我的职责就是维护服务器实例，并不需要去检索服务
     fetch-registry: false
     service-url:
       defaultZone: http://eureka7002.com:7002/eureka/

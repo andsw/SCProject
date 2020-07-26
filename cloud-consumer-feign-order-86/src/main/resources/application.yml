@@ -11,7 +11,7 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
-# \u8BBE\u7F6E\u6240\u6709\u7684\u5FAE\u670D\u52A1 \u8D85\u65F6\u914D\u7F6E
+# 设置所有的微服务 超时配置
 feign:
   client:
     config:
@@ -19,15 +19,15 @@ feign:
         connectTimeout: 1000
         readTimeout: 1000
         loggerLevel: basic
-# \u5355\u72EC\u8BBE\u7F6E\u67D0\u4E2A\u5FAE\u670D\u52A1\u7684\u8D85\u65F6\u914D\u7F6E
+# 单独设置某个微服务的超时配置
 #feign:
 #  client:
 #    config:
-#      server-A: # \u8BBE\u5B9Aserver-A \u670D\u52A1\u8C03\u7528\u7684\u8D85\u65F6\u8BBE\u7F6E
+#      server-A: # 设定server-A 服务调用的超时设置
 #        connectTimeout: 50000
 #        readTimeout: 50000
 #        loggerLevel: basic
-#  \u5982\u679C\u4EE5\u4E0A\u90FD\u6CA1\u6709\u8BBE\u7F6E\u6B63\u786E\uFF0C\u8BBE\u7F6ERibbon \u7684\u8D85\u65F6\u914D\u7F6E\u4E5F\u662F\u751F\u6548\u7684\u3002\u56E0\u4E3AFeign \u5E95\u5C42\u8FD8\u662F\u4F7F\u7528Ribbon \u8D1F\u8F7D\u8C03\u7528\u6CE8\u518C\u5230\u6CE8\u518C\u4E2D\u5FC3\u7684\u5FAE\u670D\u52A1\u7684\u3002
+#  如果以上都没有设置正确，设置Ribbon 的超时配置也是生效的。因为Feign 底层还是使用Ribbon 负载调用注册到注册中心的微服务的。
 ribbon:
   ReadTimeout: 5000
   ConnectTimeout: 5000
