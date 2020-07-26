@@ -1,0 +1,9 @@
+server:
+  port: 84
+
+spring:
+  application:
+    name: cloud-consume-order-84
+  cloud:
+    zookeeper:
+      connect-string: 47.101.223.154:2181
