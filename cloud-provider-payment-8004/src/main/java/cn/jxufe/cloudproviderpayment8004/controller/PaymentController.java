@@ -33,12 +33,12 @@ public class PaymentController {
 
     @GetMapping("/{id}")
     public NormalResult<?> getPayment(@PathVariable("id") Integer id) {
-        return new NormalResult<Payment>(HttpCodeEnum.OK_CODE.getCode(), String.valueOf(port), paymentService.selectPaymentById(id));
+        return new NormalResult<>(HttpCodeEnum.OK_CODE.getCode(), String.valueOf(port), paymentService.selectPaymentById(id));
     }
 
     @PostMapping
     public NormalResult<?> createPayment(@RequestBody Payment payment) {
         paymentService.InsertPayment(payment);
-        return new NormalResult<Payment>(HttpCodeEnum.OK_CODE.getCode(), String.valueOf(port), payment);
+        return new NormalResult<>(HttpCodeEnum.OK_CODE.getCode(), String.valueOf(port), payment);
     }
 }

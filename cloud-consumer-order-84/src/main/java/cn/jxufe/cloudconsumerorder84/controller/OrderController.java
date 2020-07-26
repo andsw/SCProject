@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import cn.jxufe.dto.NormalResult;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -26,7 +25,6 @@ public class OrderController {
 
     @GetMapping("/consumer/payment/zk")
     public String paymentInfo() {
-        String res = restTemplate.getForObject(REQUEST_URL + "/payment/zk/info", String.class);
-        return res;
+        return restTemplate.getForObject(REQUEST_URL + "/payment/zk/info", String.class);
     }
 }
