@@ -30,6 +30,6 @@
 
 # 服务熔断和降级
 #### Hystrix
-- 8003 hystrix consumer 注册7001的eureka
-- 83 hystrix openfeign consumer 注册7001的eureka
+- 8003 hystrix provider 注册7001的eureka
+- 83 hystrix openfeign consumer 注册7001的eureka hystrix服务降级示例
 

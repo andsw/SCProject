@@ -1,5 +1,8 @@
 package cn.jxufe.cloudconsumerfeignhystrix83.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,4 +52,25 @@ public class OrderController {
         log.info("port : " + port + " result : " + result + " payment throws exception!");
         return result;
     }
+
+
+    /**
+     * 客户端请求超时降级示例方法，超过一秒即调用本地方法获取结果！
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/hystrix/client/timeout/{id}")
+    @HystrixCommand(fallbackMethod = "clientMethodTimeoutHandler", commandProperties = {
+        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000")
+    })
+    public String getOrderClientTimeout(@PathVariable Integer id) {
+        final String result = hystrixPaymentService.paymentInfoTimeout(id);
+        log.info("port : " + port + " result : " + result + " payment timeout! in client method!");
+        return result;
+    }
+
+    public String clientMethodTimeoutHandler(Integer id) {
+        return "timeout in client method ! with id = " + id;
+    }
+
 }
