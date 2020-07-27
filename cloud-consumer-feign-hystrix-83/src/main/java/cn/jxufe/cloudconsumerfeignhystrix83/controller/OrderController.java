@@ -15,13 +15,13 @@ import cn.jxufe.cloudconsumerfeignhystrix83.service.HystrixPaymentService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * DefaultProperties使用的方法必须无参！
  * @author hsw
  * @date 2020/7/26 21:43
  */
 @RestController
 @RequestMapping(value = "/order")
 @Slf4j
-//defaultFallback 定义的方法必须是无参的。
 @DefaultProperties(defaultFallback = "defaultFallbackHandler")
 public class OrderController {
     private final HystrixPaymentService hystrixPaymentService;

@@ -37,7 +37,7 @@ public class PaymentService {
      * @return
      */
     public String paymentTimeoutHandler(Integer id) {
-        return "线程池: " + Thread.currentThread().getName() + "with id = " + id + "\n'timout'!!!";
+        return "线程池: " + Thread.currentThread().getName() + " with id = " + id + "\n'timout'!!!";
     }
 
     /**

@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: cloud-consumer-feign-hystrix
+  main:
+    allow-bean-definition-overriding: true
 
 eureka:
   client:
@@ -19,3 +21,6 @@ feign:
         connectTimeout: 4000
         readTimeout: 4000
         loggerLevel: basic
+  # 这里配置是为了示例feign接口实现类作为降级服务方法
+  hystrix:
+    enabled: true

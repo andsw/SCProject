@@ -33,4 +33,9 @@
 - 8003 hystrix provider 注册7001的eureka
 - 83 hystrix openfeign consumer 注册7001的eureka hystrix服务降级示例
 超时降级、发生异常降级 服务端降级、客户端降级
+> 笔记： 总结需要重启才能生效的改动
+> 
+> - 添加注解，或修改注解属性的值
+> - 修改application.yaml文件中的值
+> - 添加类，因为新添加的类没有被监控
 
