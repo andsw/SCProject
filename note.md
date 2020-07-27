@@ -32,4 +32,5 @@
 #### Hystrix
 - 8003 hystrix provider 注册7001的eureka
 - 83 hystrix openfeign consumer 注册7001的eureka hystrix服务降级示例
+超时降级、发生异常降级 服务端降级、客户端降级
 

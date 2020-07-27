@@ -1,5 +1,6 @@
 package cn.jxufe.cloudconsumerfeignhystrix83.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
@@ -20,6 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping(value = "/order")
 @Slf4j
+//defaultFallback 定义的方法必须是无参的。
+@DefaultProperties(defaultFallback = "defaultFallbackHandler")
 public class OrderController {
     private final HystrixPaymentService hystrixPaymentService;
 
@@ -69,8 +72,34 @@ public class OrderController {
         return result;
     }
 
+    /**
+     * 为了不写多余代码，也用这个方法作为默认fallback函数！
+     * @param id
+     * @return
+     */
     public String clientMethodTimeoutHandler(Integer id) {
         return "timeout in client method ! with id = " + id;
+    }
+
+    /**
+     * 定义出来作为使用default fallback method 的示例接口！
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/hystrix/default/fallback/timeout/{id}")
+    @HystrixCommand
+    public String getOrderClientTimeoutWithDefaultHandler(@PathVariable Integer id) {
+        final String result = hystrixPaymentService.paymentInfoTimeout(id);
+        log.info("result of method used default fallback method : " + result);
+        return "";
+    }
+
+    /**
+     * 作为默认fallback方法，必须无参！！！
+     * @return
+     */
+    public String defaultFallbackHandler() {
+        return "【defaultFallbackHandler】feign获取信息发生错误";
     }
 
 }
