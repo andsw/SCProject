@@ -1,5 +1,8 @@
 package cn.jxufe.cloudproviderhystrix8003.service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,13 +15,29 @@ public class PaymentService {
         return "线程池：" + Thread.currentThread().getName() + "payment ok, id is" + id;
     }
 
+    /**
+     * 83请求处配置的open feign超时时间是4秒，这里设置5秒会超时，所以设置降级
+     */
+    @HystrixCommand(fallbackMethod = "paymentTimeoutHandler", commandProperties = {
+        // 设置自身超时峰值，即如果调用接口超过3秒，就调用上面的paymentTimeoutHandler方法
+        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value="3000")
+    })
     public String paymentTimeout(Integer id) {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "线程池：" + Thread.currentThread().getName() + "payment ok, id is" + id;
+        return "线程池：" + Thread.currentThread().getName() + " payment timeout, id is" + id;
+    }
+
+    /**
+     * 为上面方法提供的服务降级方法
+     * @param id
+     * @return
+     */
+    public String paymentTimeoutHandler(Integer id) {
+        return "线程池: " + Thread.currentThread().getName() + "with id = " + id + "\n'timout'!!!";
     }
 
     public String paymentWithException(Integer id) throws ArithmeticException {
