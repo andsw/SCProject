@@ -42,4 +42,11 @@ public class OrderController {
         log.info("port : " + port + " result : " + result + " payment timeout!");
         return result;
     }
+
+    @GetMapping(value = "/hystrix/exception/{id}")
+    public String getOrderException(@PathVariable Integer id) {
+        final String result = hystrixPaymentService.paymentWithException(id);
+        log.info("port : " + port + " result : " + result + " payment throws exception!");
+        return result;
+    }
 }

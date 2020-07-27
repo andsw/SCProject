@@ -28,14 +28,21 @@ public class PaymentController {
     @GetMapping(value = "/hystrix/ok/{id}")
     public String paymentInfoOk(@PathVariable Integer id) {
         String result = paymentService.paymentOk(id);
-        log.info("result : " + result);
+        log.info("collect result : " + result);
         return result;
     }
 
     @GetMapping(value = "/hystrix/timeout/{id}")
     public String paymentInfoTimeout(@PathVariable Integer id) {
         String result = paymentService.paymentTimeout(id);
-        log.info("result : " + result);
+        log.info("result in service time delay method : " + result);
+        return result;
+    }
+
+    @GetMapping(value = "/hystrix/exception/{id}")
+    public String paymentInfoException(@PathVariable Integer id) {
+        String result = paymentService.paymentWithException(id);
+        log.info("result in service exception method : " + result);
         return result;
     }
 }

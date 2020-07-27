@@ -28,4 +28,12 @@ public interface HystrixPaymentService {
      */
     @GetMapping(value = "/payment/hystrix/timeout/{id}")
     String paymentInfoTimeout(@PathVariable Integer id);
+
+    /**
+     * 测试服务端报错的服务降级
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/payment/hystrix/exception/{id}")
+    String paymentWithException(@PathVariable Integer id);
 }

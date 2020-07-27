@@ -40,9 +40,19 @@ public class PaymentService {
         return "线程池: " + Thread.currentThread().getName() + "with id = " + id + "\n'timout'!!!";
     }
 
+    /**
+     * 这里示例当服务报错时的服务降级。
+     */
+    @HystrixCommand(fallbackMethod = "paymentExceptionHandler", commandProperties = {
+        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000")
+    })
     public String paymentWithException(Integer id) throws ArithmeticException {
         int a = 0;
         System.out.println(4 / a);
         return "线程池：" + Thread.currentThread().getName() + "payment time out, id is" + id;
+    }
+
+    public String paymentExceptionHandler(Integer id) {
+        return "线程池: " + Thread.currentThread().getName() + "with id = " + id + "\n throws 'ArithmeticException'!!!";
     }
 }
