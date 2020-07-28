@@ -102,4 +102,16 @@ public class OrderController {
         return "【defaultFallbackHandler】feign获取信息发生错误";
     }
 
+    /**
+     * 客户端接口方法，测试服务端短路其！
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/hystrix/breaker/exception/{id}")
+    public String getOrderWithBreaker(@PathVariable Integer id) {
+        final String result = hystrixPaymentService.paymentExceptionBreaker(id);
+        log.info("get result with breaker, result : " + result);
+        return result;
+    }
+
 }

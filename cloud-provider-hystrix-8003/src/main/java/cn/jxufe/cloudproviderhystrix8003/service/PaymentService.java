@@ -5,6 +5,9 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
 import org.springframework.stereotype.Component;
 
+import java.security.InvalidParameterException;
+import java.util.UUID;
+
 /**
  * @author hsw
  * @date 2020/7/26 19:27
@@ -54,5 +57,32 @@ public class PaymentService {
 
     public String paymentExceptionHandler(Integer id) {
         return "线程池: " + Thread.currentThread().getName() + "with id = " + id + "\n throws 'ArithmeticException'!!!";
+    }
+
+    /**
+     * HystrixProperty从上到下作用：
+     *      开启断路器
+     *      请求量的阈值
+     *      失败率达到多少百分比熔断：表示当请求量到达上面的阈值，失败率达到多少时断路器断开
+     *      熔断器断开窗口时间：表示短路器断开后多少时间才会变成半开放的状态！
+     * @param id
+     * @return
+     */
+    @HystrixCommand(fallbackMethod = "circuitBreakerOpenOrExceptionHandler", commandProperties = {
+        @HystrixProperty(name = "circuitBreaker.enabled", value = "true"),
+        @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
+        @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"),
+        @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60")
+    })
+    public String paymentCircuitBreaker(Integer id) {
+        if (id < 0) {
+            throw new InvalidParameterException();
+        }
+        String uid = UUID.randomUUID().toString();
+        return "thread name : " + Thread.currentThread().getName() + " uid : " + uid + " id : " + id;
+    }
+
+    public String circuitBreakerOpenOrExceptionHandler(Integer id) {
+        return "😔出错误了！！！ thread name：" + Thread.currentThread().getName() + " id : " + id;
     }
 }

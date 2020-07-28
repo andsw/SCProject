@@ -36,4 +36,12 @@ public interface HystrixPaymentService {
      */
     @GetMapping(value = "/payment/hystrix/exception/{id}")
     String paymentWithException(@PathVariable Integer id);
+
+    /**
+     * 测试服务端断路器短路服务方法！
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/payment/hystrix/circuit/breaker/exception/{id}")
+    String paymentExceptionBreaker(@PathVariable Integer id);
 }

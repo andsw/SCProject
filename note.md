@@ -33,7 +33,22 @@
 - 8003 hystrix provider 注册7001的eureka
 - 83 hystrix openfeign consumer 注册7001的eureka hystrix服务降级示例
 超时降级、发生异常降级 服务端降级、客户端降级
-> 笔记： 总结需要重启才能生效的改动
+> ####关于熔断
+> 1. Assuming the volume across a circuit meets a certain threshold
+>    (HystrixCommandProperties.circuitBreakerRequestVolumeThreshold)
+> 2. And assuming that the error percentage exceeds the threshold error percentage
+>    (HystrixCommandProperties.circuitBreakerErrorThresholdPercentage)
+> 3. Then the circuit-breaker transitions ``CLOSED`` to ``OPEN``.
+> 4. While it is open, it short-circuits all requests made against that circuit-break.
+> 5. After some amount of time
+>    (HystrixCommandProperties.circuitBreakerSleepWindowInMilliseconds()), the next single
+>    request is let through(this is the ``HALF-OPEN`` state). If the request fails, the
+>    circuit-breaker returns to the ```OPEN``` state for the duration of the sleep window.
+>    if the request succeeds, the circuit-breaker transitions to ```CLOSED``` and the logic
+>    in 1. takes over again.
+
+##笔记：
+> 总结需要重启才能生效的改动
 > 
 > - 添加注解，或修改注解属性的值
 > - 修改application.yaml文件中的值
