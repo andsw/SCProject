@@ -18,7 +18,8 @@ spring:
     gateway:
       routes:
         - id: payment_route
-          uri: http://localhost:8001
+#          uri: http://localhost:8001
+          uri: lb://cloud-provider-payment #配置动态路由的写法
           predicates:
             - Path=/payment/**
 #        - id: payment_route2
