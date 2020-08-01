@@ -22,7 +22,10 @@ spring:
           uri: lb://cloud-provider-payment #配置动态路由的写法
           predicates:
             - Path=/payment/**
-#        - id: payment_route2
-#          url: http://localhost:8001
-#          predictes:
-#            - Path=/payment/lb/**
+#            - Before=2020-02-05T15:10:03.685+08:00[Asia/Shanghai]
+#            - After=2020-02-05T15:10:03.685+08:00[Asia/Shanghai]
+#            - Cookie=username,passwd
+#            - Header=X-Request-Id,\d+ #表示值为整数
+#            - Host=localhost
+#            - Method=GET
+#            - Query=username, \d+ 表示query必须有username并且值还为整数
