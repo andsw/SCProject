@@ -47,6 +47,12 @@
 >    if the request succeeds, the circuit-breaker transitions to ```CLOSED``` and the logic
 >    in 1. takes over again.
 
+# 网关
+#### gateway
+> Zuul因为1过时，2还处于半成品，所以这里直接学习Gateway了！
+
+
+
 ##笔记：
 > 总结需要重启才能生效的改动
 > 
