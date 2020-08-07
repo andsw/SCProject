@@ -1,0 +1,36 @@
+server:
+  port: 8802
+spring:
+  application:
+    name: cloud-stream-rabbitmq-listener
+  cloud:
+    stream:
+      binders:
+        defaultRabbit: # 表示定义的名字，用于与下面的binding整合
+          type: rabbit # 消息组件类型
+          environment: # 设置rabbitmq的相关环境配置
+            spring:
+              rabbitmq:
+                host: 47.101.223.154
+                port: 5672
+                username: root
+                password: root
+                virtual-host: /
+      bindings:
+        input:
+          destination: studyExchange
+          content-type: application/json
+          binder: defaultRabbit
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/
+  instance:
+    # 如果现在超过了5秒的时间间隔，默认90秒
+    lease-expiration-duration-in-seconds: 5
+    # 设置心跳的时间间隔 默认30秒
+    lease-renewal-interval-in-seconds: 2
+    prefer-ip-address: true
