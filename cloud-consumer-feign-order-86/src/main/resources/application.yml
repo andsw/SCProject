@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: cloud-consumer-feign-order-86
+  zipkin:
+    base-url: http://47.101.223.154:9411
+  sleuth:
+    sampler:
+      probability: 1
 
 eureka:
   client:
