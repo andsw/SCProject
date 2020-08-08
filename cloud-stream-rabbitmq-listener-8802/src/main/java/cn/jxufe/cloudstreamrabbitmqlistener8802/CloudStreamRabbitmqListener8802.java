@@ -10,8 +10,8 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @SpringBootApplication
 @EnableEurekaClient
-public class CloudStreamRabbitmqListener8002 {
+public class CloudStreamRabbitmqListener8802 {
     public static void main(String[] args) {
-        SpringApplication.run(CloudStreamRabbitmqListener8002.class, args);
+        SpringApplication.run(CloudStreamRabbitmqListener8802.class, args);
     }
 }

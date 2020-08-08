@@ -27,6 +27,7 @@
         <module>cloud-gateway-9527</module>
         <module>cloud-stream-rabbitmq-provider-8801</module>
         <module>cloud-stream-rabbitmq-listener-8802</module>
+        <module>cloud-stream-rabbitmq-listener-8803</module>
     </modules>
     <groupId>cn.jxufe</groupId>
     <artifactId>SCProject</artifactId>
