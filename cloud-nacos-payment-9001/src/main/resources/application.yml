@@ -1,0 +1,18 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: nacos-payment-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+# 维护nacos服务配置的data-id 
+# ${spring.application.name}-${spring-profile-active}.${spring-cloud-nacos-config.file-extension}
