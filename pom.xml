@@ -30,6 +30,7 @@
         <module>cloud-stream-rabbitmq-listener-8803</module>
         <module>cloud-nacos-payment-9001</module>
         <module>cloud-nacos-order-9002</module>
+        <module>cloud-sentinel-service-8401</module>
     </modules>
     <groupId>cn.jxufe</groupId>
     <artifactId>SCProject</artifactId>
